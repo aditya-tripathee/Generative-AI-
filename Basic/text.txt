@@ -1,0 +1,47 @@
+LLM :-- Large Language Model
+It is a type of artificial intelligence trained on massive amounts of text data to understand, generate, and work with human language.
+
+LLM break into 3 words :--
+1. Large :-- It is trained on a large amount of text data.
+2. Language :-- It understand and generate human language.
+3. Model :-- It is deep learning system that learns patterns from data.
+
+
+How LLM generate response?
+Suppose when we type "what is python"
+LLM doesn't search on google , think like a human or understand meaning like we do .
+LLM looks at pattern at learned during training and predict next word.
+
+Example:-
+Input: "what is "
+Possible next words: "python", "java", "c++", "machine learning", "deep learning", etc.
+
+If the previous word is "what is ", the most probable next word is "python".
+If the previous word is "what is python", the most probable next word is "is".
+If the previous word is "what is python is", the most probable next word is "a".
+If the previous word is "what is python is a", the most probable next word is "programming".
+If the previous word is "what is python is a programming", the most probable next word is "language".
+If the previous word is "what is python is a programming language", the most probable next word is ".".
+
+
+
+Some popular LLM'S are :
+1. Gemini
+2. ChatGPT
+3. Claude
+4. Llama
+5. Mistral
+6. Grok
+
+
+Application of LLM :--
+1. Text Generation
+2. Translation
+3. Summarization
+4. Question Answering
+5. Code Generation
+6. Chatbot
+7. Sentiment Analysis
+8. Text Classification
+
+
