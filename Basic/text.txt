@@ -45,3 +45,71 @@ Application of LLM :--
 8. Text Classification
 
 
+
+Langchain :--
+Langchain is a framework that helps us to build applications that use LLMs.
+
+
+Components of Langchain :--
+1. Models
+2. Prompts
+3. Chains
+4. Memory
+5. Agents
+6. Indexes
+
+
+Models :-- 
+It is the core intelligence layer.
+It helps to generate text, embedding or other outputs.
+It connects your applications to LLM providers like :
+  - OpenAI
+  - Google DeepMind
+  - Anthropic
+
+In pratical Generative AI , there are mainly 3 types of models :
+1. Chat Models :-- 
+   - Generate text 
+   - Used for Chatbots
+   - write code 
+   - Summarization 
+
+2. Embedding Models :--
+   - Convert text into numbers 
+   - Used in search and RAG
+   - Help find similar content 
+
+3. Multimodal Models :--
+   - Work with more than just text.
+   - Can process images , audio and files 
+
+
+
+Prompts :-- It is a instructions we give to a language model.
+It tells the model :
+ - What to do 
+ - How to responds 
+ - What format to use 
+
+ Without prompts, the model has no direction 
+ 
+ Example:-
+ Prompt: """
+ You are a friendly teaching assistant. 
+ Explain the concept of photosynthesis to a 10 year old.
+ Keep the response under 100 words and use simple examples.
+ """
+
+ Output: """
+Imagine a plant is like a tiny chef!
+
+It takes sunlight, water, and air (carbon dioxide)
+
+Mixes them in its leaves (the kitchen)
+
+Makes its own food (sugar)
+
+Releases oxygen for us to breathe.
+"""
+
+
