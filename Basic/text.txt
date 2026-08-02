@@ -112,4 +112,71 @@ Makes its own food (sugar)
 Releases oxygen for us to breathe.
 """
 
+Types of Prompts :--
+1. Simple Prompts :--- 
+Just a direct instructions or commands.
+
+Example:- 
+What is the capital of France?
+
+2. System + User Prompt :---
+System message tells model how to behave.
+User message is the actual query.
+
+Example:- 
+System: "You are a helpful assistant."
+User: "What is the capital of France?"
+
+
+3. Prompt Templates :--
+Instead of writing full prompt every time, we can use templates. 
+It helps to reuse prompts.
+
+Example:- 
+Prompt Template: """
+Translate the following text to {language}:
+
+4. Structured Prompts :---
+Used when we need response in a specific format ( like json , xml , csv , etc. )
+
+Example:- 
+Prompt: """
+Extract the product name and price from the following text:
+
+{text}
+Output should be in JSON format with keys: "product_name", "price".
+"""
+
+Response: """
+{
+  "product_name": "Laptop",
+  "price": "50000"
+}
+"""
+
+5.Few-Shot Prompts :---
+Provide examples to show the model what you want.
+
+Example:- 
+Prompt: """
+Translate English to French:
+
+English: Hello
+French: Bonjour
+
+English: Goodbye
+French: Au revoir
+
+English: Thank you
+French: Merci
+
+English: {english_text}
+French: """
+
+
+
+
+
+
+
 
