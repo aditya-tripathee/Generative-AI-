@@ -8,3 +8,4 @@ openai
 google-generativeai
 mistralai
 python-dotenv
+langchain-huggingface   
