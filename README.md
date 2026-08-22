@@ -1,56 +1,95 @@
 # 🚀 Generative AI & LangChain Playground
 
-A comprehensive, modular repository for experimenting with **Generative AI**, **Large Language Models (LLMs)**, and **LangChain**. This project demonstrates how to connect, configure, and execute various AI models ranging from cloud-hosted APIs (Google Gemini, Hugging Face Hub) to locally hosted open-source models using Hugging Face Transformers.
+[![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![Framework](https://img.shields.io/badge/Framework-LangChain-green.svg)](https://www.langchain.com/)
+[![Package Manager](https://img.shields.io/badge/Package%20Manager-uv-purple.svg)](https://github.com/astral-sh/uv)
+[![UI](https://img.shields.io/badge/UI-Streamlit-FF4B4B.svg)](https://streamlit.io/)
+[![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)](#-license)
+
+A comprehensive, production-ready playground for experimenting with **Generative AI**, **Large Language Models (LLMs)**, **LangChain (LCEL)**, **Vector Embeddings**, and **Interactive Web Applications**. This repository demonstrates how to integrate, configure, and orchestrate cloud-hosted API models (Google Gemini, Mistral AI, Hugging Face Hub) alongside local open-source models (PyTorch/Transformers).
 
 ---
 
-## 📌 Features & Highlights
+## 📋 Table of Contents
 
-- **Multi-Provider LLM Integrations**:
-  - **Google Gemini**: Built with `langchain-google-genai` using models like `gemini-flash-latest`. Supports fine-tuned hyperparameter adjustments (temperature, max output tokens).
-  - **Hugging Face Hub**: Remote inference endpoints via `langchain-huggingface` (e.g., DeepSeek, Qwen).
-  - **Local Open-Source LLMs**: In-memory local pipelines powered by Hugging Face `transformers` (e.g., `TinyLlama`, `Zephyr`).
-- **Embedding Models**: Dedicated modules for generating vector embeddings and text representations.
-- **Modern Python Environment Setup**:
-  - Fast environment & package management via [`uv`](https://github.com/astral-sh/uv).
-  - Full compatibility with traditional `pip` and `pyproject.toml`.
-- **Environment & Key Management**: Centralized `.env` handling via `python-dotenv`.
+- [✨ Key Features](#-key-features)
+- [📁 Repository Architecture](#-repository-architecture)
+- [🛠️ Tech Stack & Dependencies](#%EF%B8%8F-tech-stack--dependencies)
+- [⚙️ Environment Setup & Installation](#%EF%B8%8F-environment-setup--installation)
+- [🔑 API Key Configuration](#-api-key-configuration)
+- [💻 Module Overview & Execution](#-module-overview--execution)
+  - [1. CineSage: Structured Movie Analyst](#1-cinesage-structured-movie-analyst)
+  - [2. Interactive CLI Chatbot](#2-interactive-cli-chatbot)
+  - [3. Interactive Web Chatbots (Streamlit)](#3-interactive-web-chatbots-streamlit)
+  - [4. Multi-Provider Chat Models](#4-multi-provider-chat-models)
+  - [5. Vector Embedding Models](#5-vector-embedding-models)
+- [🧑‍💻 Author & License](#-author--license)
 
 ---
 
-## 📁 Repository Structure
+## ✨ Key Features
+
+- **Multi-Provider LLM Orchestration**:
+  - **Google Gemini**: Integration via `langchain-google-genai` (`gemini-flash-latest`, `gemini-pro`) with configurable temperature and token bounds.
+  - **Mistral AI**: Integration via `langchain-mistralai` (`open-mistral-7b`) for structured parsing, conversation agents, and chat history.
+  - **Hugging Face Hub**: Remote inference endpoints via `langchain-huggingface` (`DeepSeek`, `Qwen`, etc.).
+  - **Local Open-Source LLMs**: In-memory local inference pipelines using Hugging Face `transformers` (e.g., `TinyLlama-1.1B`).
+- **Structured Data Extraction (LCEL & Pydantic)**:
+  - **CineSage Engine**: Combines `PydanticOutputParser` with LCEL chains (`prompt | model | parser`) to output strictly typed JSON objects (director, cast, highlights, themes, cultural impact).
+- **Conversational State & UI Interfaces**:
+  - **CLI Chatbot**: State-aware interactive shell assistant utilizing `SystemMessage`, `HumanMessage`, and `AIMessage` memory tracking.
+  - **Streamlit Web Apps**: `app.py` and `uichatbot.py` with custom CSS, sidebars, avatar icons, and auto-run direct execution capabilities.
+- **Embeddings & Vector Representations**:
+  - **Hugging Face Sentence Transformers**: `sentence-transformers/all-MiniLM-L6-v2` for local vector embeddings.
+  - **Google Gemini Embeddings**: Cloud-based embedding generation with cosine similarity metrics for semantic search.
+- **Modern Package & Environment Management**:
+  - Blazing-fast virtual environment setup powered by [`uv`](https://github.com/astral-sh/uv).
+
+---
+
+## 📁 Repository Architecture
 
 ```text
-.
+Generative-AI-/
 ├── Basic/
+│   ├── CineSage/
+│   │   └── core.py                 # Structured movie analysis LCEL chain with Pydantic parser
 │   ├── chatmodels/
-│   │   ├── chat.py           # Google Gemini API invocation using LangChain
-│   │   ├── huggingFace.py    # Hugging Face remote endpoints & pipeline invocation
-│   │   └── localmodel.py     # Local Transformers model execution
+│   │   ├── app.py                  # Streamlit web chatbot with session memory state
+│   │   ├── chat.py                 # Google Gemini Chat API invocation using LangChain
+│   │   ├── chatbot.py              # CLI interactive chat tool with conversation memory
+│   │   ├── huggingFace.py          # Hugging Face remote endpoints & pipeline execution
+│   │   ├── localmodel.py           # Local Transformers model execution (TinyLlama)
+│   │   └── uichatbot.py            # Streamlit chatbot web app with custom CSS & sidebar
 │   ├── embeddingmodels/
-│   │   └── embeddingmodels.py# Vector embedding utilities
+│   │   ├── embeddingmodels.py      # Vector embeddings & cosine similarity calculations
+│   │   └── huggingface_embedding.py# Document embedding batch pipeline via sentence-transformers
 │   ├── src/
-│   │   └── basic/            # Package source modules
-│   ├── .env                  # Environment configuration (API Keys - gitignored)
-│   ├── pyproject.toml        # Project configuration & UV build specs
-│   ├── requirements.txt      # Dependency manifest
-│   └── README.md             # Submodule overview
-└── README.md                 # Main Repository Documentation
+│   │   └── basic/                  # Core package source module (__init__.py)
+│   ├── .env                        # Environment variables & API keys (gitignored)
+│   ├── pyproject.toml              # UV build system & package metadata
+│   ├── requirements.txt            # Project dependencies manifest
+│   └── README.md                   # Basic submodule overview
+└── README.md                       # Main Repository Documentation
 ```
 
 ---
 
-## 🛠️ Prerequisites
+## 🛠️ Tech Stack & Dependencies
 
-- **Python**: `>= 3.10` (Project configured for Python 3.14 compatibility)
-- **Package Manager**: [`uv`](https://github.com/astral-sh/uv) (recommended) or `pip`
-- **API Keys**:
-  - [Google AI Studio API Key](https://aistudio.google.com/) for Gemini models
-  - [Hugging Face Access Token](https://huggingface.co/settings/tokens) for Hugging Face endpoints
+- **Language**: Python 3.10+ (Tested through Python 3.14)
+- **Frameworks**: LangChain (`langchain`, `langchain-core`, `langchain-community`)
+- **Model Providers**:
+  - `langchain-google-genai` / `google-generativeai`
+  - `langchain-mistralai` / `mistralai`
+  - `langchain-huggingface` / `transformers` / `torch`
+  - `langchain-openai` / `groq` (compatible)
+- **Web UI & Parsing**: Streamlit, Pydantic (v2), `python-dotenv`
+- **Embeddings**: `sentence-transformers`
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Environment Setup & Installation
 
 ### 1. Clone the Repository
 ```bash
@@ -58,7 +97,7 @@ git clone https://github.com/aditya-tripathee/Generative-AI-.git
 cd Generative-AI-/Basic
 ```
 
-### 2. Set Up Virtual Environment
+### 2. Create Virtual Environment
 
 **Using `uv` (Recommended):**
 ```bash
@@ -88,72 +127,78 @@ pip install -r requirements.txt
 
 ---
 
-## 🔑 Environment Configuration
+## 🔑 API Key Configuration
 
-Create a `.env` file inside the `Basic/` directory with your API credentials:
+Create a `.env` file in the `Basic/` directory:
 
 ```env
 # Basic/.env
-GOOGLE_API_KEY=your_google_gemini_api_key_here
-HUGGINGFACE_ACCESS_TOKEN=your_huggingface_token_here
+GOOGLE_API_KEY=your_google_gemini_api_key
+MISTRAL_API_KEY=your_mistral_ai_api_key
+HUGGINGFACE_ACCESS_TOKEN=your_huggingface_token
 ```
 
-> ⚠️ **Security Warning:** Never commit your `.env` file or raw API keys to public repositories. Ensure `.env` is listed in your `.gitignore`.
+> ⚠️ **Security Note:** Do not commit the `.env` file or plain API credentials to Git. Keep `.env` listed in `.gitignore`.
 
 ---
 
-## 💻 Usage & Examples
+## 💻 Module Overview & Execution
 
-Navigate to the `Basic/` directory before executing scripts:
+Ensure you are inside the `Basic/` directory before running commands:
 
-### 1. Google Gemini Chat Model
-Run the Google Gemini model using `langchain-google-genai`:
+### 1. CineSage: Structured Movie Analyst
+Runs an LCEL chain (`prompt | model | parser`) with `ChatMistralAI` and `PydanticOutputParser` to analyze movies into structured data:
 ```bash
+python CineSage/core.py
+```
+
+### 2. Interactive CLI Chatbot
+Runs a terminal conversational session with state history (`SystemMessage`, `HumanMessage`, `AIMessage`):
+```bash
+python chatmodels/chatbot.py
+```
+
+### 3. Interactive Web Chatbots (Streamlit)
+Launch browser-based web applications:
+```bash
+# Basic Streamlit Chatbot
+python chatmodels/app.py
+
+# Custom Styled Web UI (Custom CSS, Sidebar config, Avatar support)
+python chatmodels/uichatbot.py
+```
+*(Note: Files automatically invoke `streamlit run` if executed directly via `python`.)*
+
+### 4. Multi-Provider Chat Models
+Run different LLM backends:
+```bash
+# Google Gemini API
 python chatmodels/chat.py
-```
-*Configurable Parameters:*
-- `temperature`: Adjusts output creativity (`0.0` for factual/code, `0.8+` for creative writing).
-- `max_output_tokens`: Restricts maximum response length to manage costs.
 
-### 2. Hugging Face Models
-Run inference on Hugging Face models using local pipelines or endpoints:
-```bash
+# Hugging Face Endpoints / Hub
 python chatmodels/huggingFace.py
-```
 
-### 3. Local Model Pipeline
-Run open-source models (like `TinyLlama`) locally using PyTorch and Transformers:
-```bash
+# Local PyTorch/Transformers Pipeline (TinyLlama)
 python chatmodels/localmodel.py
 ```
 
-### 4. Text Embedding Models & Semantic Similarity
-Generate vector embeddings (via Google Gemini or local `sentence-transformers`) and compute semantic similarity scores:
+### 5. Vector Embedding Models
+Generate text embeddings and calculate semantic vector similarities:
 ```bash
+# Gemini & Local HuggingFace Embeddings + Cosine Similarity
 python embeddingmodels/embeddingmodels.py
+
+# HuggingFace Document Embeddings Batch
+python embeddingmodels/huggingface_embedding.py
 ```
 
 ---
 
-## 📦 Dependencies
+## 🧑‍💻 Author & License
 
-Major dependencies defined in `requirements.txt`:
-- `langchain` & `langchain-community`
-- `langchain-google-genai`
-- `langchain-huggingface`
-- `google-generativeai`
-- `transformers` & `torch`
-- `python-dotenv`
-
----
-
-## 🧑‍💻 Author
-
-- **Aditya Tripathee** - [adityatripatheee@gmail.com](mailto:adityatripatheee@gmail.com)
+- **Author**: Aditya Tripathee
 - **GitHub**: [@aditya-tripathee](https://github.com/aditya-tripathee)
+- **Email**: [adityatripatheee@gmail.com](mailto:adityatripatheee@gmail.com)
 
----
+*Maintained for educational and Generative AI research purposes.*
 
-## 📄 License
-
-This repository is maintained for educational and generative AI research purposes.
