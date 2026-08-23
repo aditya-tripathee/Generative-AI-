@@ -15,4 +15,3 @@ print("Metadata:", docs[0].metadata)
 print("\n--- Content Preview (Page 1) ---")
 print(docs[0])
 
-
