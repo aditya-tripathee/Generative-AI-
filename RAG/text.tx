@@ -1,0 +1,76 @@
+RAG :-- Retrieval Augmented Generation
+
+Definition:
+Retrieval-Augmented Generation (RAG) is an AI architecture that enhances Large Language Models (LLMs) by retrieving 
+relevant facts from an external vector knowledge base before generating responses.
+
+Detailed Notes File: RAG/RAG_Notes.md
+
+# RAG: Retrieval-Augmented Generation
+
+**Definition:** RAG is an AI architecture that enhances Large Language Models (LLMs) by retrieving 
+relevant facts from an external knowledge base before generating a response.
+
+## 1. Why do we need RAG?
+
+LLMs have limitations:
+- **Limited Knowledge:** They only know what they were trained on (knowledge cutoff).
+- **Hallucinations:** They can generate false or nonsensical information.
+- **Inability to access private/real-time data:** They cannot access your personal documents, company data, or live web information.
+
+RAG solves these by:
+- **Grounding:** Providing real facts to the LLM.
+- **Up-to-date:** Allowing access to the latest information.
+- **Transparency:** Showing which documents were used.
+
+## 2. How does RAG work? (The Pipeline)
+
+The RAG process has two main phases:
+
+### Phase 1: Ingestion (Indexing) - Offline Process
+
+This happens once before you start asking questions.
+
+1.  **Load Documents:** Read your PDFs, Word docs, text files, web pages, etc.
+2.  **Chunking:** Split large documents into smaller manageable pieces (e.g., 500–1000 characters). This is crucial because LLMs have limited context windows.
+3.  **Embedding:** Convert each chunk into a vector (a list of numbers) using an embedding model (e.g., `sentence-transformers`). This captures the semantic meaning.
+4.  **Store in Vector Database:** Save these vectors in a specialized database (e.g., Chroma, FAISS, Pinecone, Milvus) that allows fast similarity searches.
+
+### Phase 2: Querying (Inference) - Online Process
+
+This happens every time you ask a question.
+
+1.  **Embed the Query:** Convert the user's question into a vector using the same embedding model.
+2.  **Search (Retrieval):** Compare the query vector with all vectors in the database to find the top K most similar chunks (e.g., top 3 most relevant pieces of text).
+3.  **Prompt Construction:** Create a prompt that includes:
+    - The original user query
+    - The retrieved text chunks as context
+    - Instructions for the LLM
+4.  **Generation:** Send this combined prompt to the LLM, which generates a final answer based on the provided context.
+
+## 3. Key Components
+
+| Component | Purpose | Popular Tools |
+| :--- | :--- | :--- |
+| **Document Loader** | Reads various file formats | `PyPDF2`, `python-docx`, `BeautifulSoup`, `Unstructured` |
+| **Text Splitter** | Breaks text into chunks | `RecursiveCharacterTextSplitter`, `SentenceTransformer` splitter |
+| **Embedding Model** | Converts text → vectors | `sentence-transformers`, OpenAI Embeddings, Cohere Embeddings |
+| **Vector Database** | Stores and searches vectors | **ChromaDB** (local, easy), **FAISS** (fast, Facebook), **Qdrant** (production), Pinecone, Milvus |
+| **Retriever** | Finds relevant chunks | LangChain's `VectorStoreRetriever` |
+| **LLM** | Generates the final answer | OpenAI (GPT), Anthropic (Claude), HuggingFace models |
+
+## 4. Example Use Cases
+
+- **Chatbot on company documents:** Answer employee questions about HR policies or technical manuals.
+- **Customer support bot:** Answer questions about products using the company's knowledge base.
+- **Research assistant:** Summarize and answer questions about academic papers.
+- **Legal document analysis:** Find relevant clauses in contracts.
+
+## 5. Evaluation
+
+You evaluate RAG systems using:
+- **Context Relevance:** Did we retrieve the right documents?
+- **Faithfulness:** Did the LLM stick to the retrieved context (not hallucinate)?
+- **Answer Relevance:** Does the final answer address the user's question?
+
+Popular tools: `Ragas`, `TruLens`, `DeepEval`.
