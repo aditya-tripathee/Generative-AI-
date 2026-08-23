@@ -1,0 +1,53 @@
+# LLM Providers
+openai
+mistralai
+
+# LangChain
+langchain
+langchain-core
+langchain-community
+langchain-openai
+langchain-mistralai
+langchain-text-splitters
+
+# Vector Database
+chromadb
+langchain-chroma
+
+# Embeddings
+sentence-transformers
+
+# Document Loaders
+pypdf
+python-docx
+openpyxl
+unstructured
+beautifulsoup4
+markdown
+
+# Environment Variables
+python-dotenv
+
+# Backend / API
+fastapi
+uvicorn
+
+# Data Validation
+pydantic
+pydantic-settings
+
+# Tokenization
+tiktoken
+
+# HTTP
+requests
+httpx
+
+# Numerical / ML
+numpy
+
+# Observability / RAG Evaluation
+langsmith
+
+# Development
+ipykernel
