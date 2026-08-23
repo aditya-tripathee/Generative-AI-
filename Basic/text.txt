@@ -1,0 +1,230 @@
+LLM :-- Large Language Model
+It is a type of artificial intelligence trained on massive amounts of text data to understand, generate, and work with human language.
+
+LLM break into 3 words :--
+1. Large :-- It is trained on a large amount of text data.
+2. Language :-- It understand and generate human language.
+3. Model :-- It is deep learning system that learns patterns from data.
+
+
+How LLM generate response?
+Suppose when we type "what is python"
+LLM doesn't search on google , think like a human or understand meaning like we do .
+LLM looks at pattern at learned during training and predict next word.
+
+Example:-
+Input: "what is "
+Possible next words: "python", "java", "c++", "machine learning", "deep learning", etc.
+
+If the previous word is "what is ", the most probable next word is "python".
+If the previous word is "what is python", the most probable next word is "is".
+If the previous word is "what is python is", the most probable next word is "a".
+If the previous word is "what is python is a", the most probable next word is "programming".
+If the previous word is "what is python is a programming", the most probable next word is "language".
+If the previous word is "what is python is a programming language", the most probable next word is ".".
+
+
+
+Some popular LLM'S are :
+1. Gemini
+2. ChatGPT
+3. Claude
+4. Llama
+5. Mistral
+6. Grok
+
+
+Application of LLM :--
+1. Text Generation
+2. Translation
+3. Summarization
+4. Question Answering
+5. Code Generation
+6. Chatbot
+7. Sentiment Analysis
+8. Text Classification
+
+
+
+Langchain :--
+Langchain is a framework that helps us to build applications that use LLMs.
+
+
+Components of Langchain :--
+1. Models
+2. Prompts
+3. Chains
+4. Memory
+5. Agents
+6. Indexes
+
+
+Models :-- 
+It is the core intelligence layer.
+It helps to generate text, embedding or other outputs.
+It connects your applications to LLM providers like :
+  - OpenAI
+  - Google DeepMind
+  - Anthropic
+
+In pratical Generative AI , there are mainly 3 types of models :
+1. Chat Models :-- 
+   - Generate text 
+   - Used for Chatbots
+   - write code 
+   - Summarization 
+
+2. Embedding Models :--
+   - Convert text into numbers 
+   - Used in search and RAG
+   - Help find similar content 
+
+3. Multimodal Models :--
+   - Work with more than just text.
+   - Can process images , audio and files 
+
+
+
+Prompts :-- It is a instructions we give to a language model.
+It tells the model :
+ - What to do 
+ - How to responds 
+ - What format to use 
+
+ Without prompts, the model has no direction 
+ 
+ Example:-
+ Prompt: """
+ You are a friendly teaching assistant. 
+ Explain the concept of photosynthesis to a 10 year old.
+ Keep the response under 100 words and use simple examples.
+ """
+
+ Output: """
+Imagine a plant is like a tiny chef!
+
+It takes sunlight, water, and air (carbon dioxide)
+
+Mixes them in its leaves (the kitchen)
+
+Makes its own food (sugar)
+
+Releases oxygen for us to breathe.
+"""
+
+Types of Prompts :--
+1. Simple Prompts :--- 
+Just a direct instructions or commands.
+
+Example:- 
+What is the capital of France?
+
+2. System + User Prompt :---
+System message tells model how to behave.
+User message is the actual query.
+
+Example:- 
+System: "You are a helpful assistant."
+User: "What is the capital of France?"
+
+
+3. Prompt Templates :--
+Instead of writing full prompt every time, we can use templates. 
+It helps to reuse prompts.
+
+Example:- 
+Prompt Template: """
+Translate the following text to {language}:
+
+4. Structured Prompts :---
+Used when we need response in a specific format ( like json , xml , csv , etc. )
+
+Example:- 
+Prompt: """
+Extract the product name and price from the following text:
+
+{text}
+Output should be in JSON format with keys: "product_name", "price".
+"""
+
+Response: """
+{
+  "product_name": "Laptop",
+  "price": "50000"
+}
+"""
+
+5.Few-Shot Prompts :---
+Provide examples to show the model what you want.
+
+Example:- 
+Prompt: """
+Translate English to French:
+
+English: Hello
+French: Bonjour
+
+English: Goodbye
+French: Au revoir
+
+English: Thank you
+French: Merci
+
+English: {english_text}
+French: """
+
+
+3. Chains:--
+A chain is a sequence of operations that can be executed one after another.
+
+Example:- 
+Chain: """
+1. Take user input
+2. Call LLM to process input
+3. Format the response
+4. Return the response
+"""
+
+4. Memory :--
+Memory allows the AI system to remember past interactions.
+Without Memory :
+  every message is treated independently.
+
+With Memory :
+  The model can use previous context.
+
+Example:- 
+Chatbot: "What is your name?"  
+User: "My name is Aditya"
+Chatbot: "Hi Aditya, how are you?"
+
+Without Memory :
+  Chatbot: "What is your name?"  
+  User: "My name is Aditya"
+  Chatbot: "I don't know your name"
+
+
+5. Indexes :--
+Indexes allows us to connects external data to an LLM.
+LLMs only known what they were trained on.
+Indexes Help them use :
+PDFs, Documents, Databases, Company data, Websites.
+
+
+LLMs doesn't known your company data, private Documents, update in real time.
+So how we solve this ?
+
+We use indexes to connects external knowledge.
+This system is called Retrieval Augmented Generation (RAG).
+
+
+6. Agents :--
+Agents is an AI system that can perform actions using tools.
+
+Tools are the functions that the agent can use to get information or perform actions.
+
+
+
+
+
+
