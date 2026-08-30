@@ -24,13 +24,53 @@ embeddings = HuggingFaceEmbeddings(
 vectorstore = Chroma.from_documents(
     documents=docs,
     embedding=embeddings,
-    persist_directory="chroma_db"
+    persist_directory="chroma_db" #directory where the vectorstore will be stored
 )
 
-print("DB created successfully")
+# print("DB created successfully")
 
 # result = vectorstore.similarity_search("What is AI?")
 # print(result)
 
 
 
+# used retrivers to get specific chunks of documents
+
+result = vectorstore.similarity_search("What is AI?", k=2)
+# print(result.page_content)
+# print(result.metadata)
+
+
+for r in result:
+    print(r.page_content)
+    print(r.metadata)
+
+RETRIVER = vectorstore.as_retriever(search_kwargs={"k":2})
+
+result = RETRIVER.get_relevant_documents("What is AI?")
+
+for r in result:
+    print(r.page_content)
+    print(r.metadata)
+
+
+    # creating vector database from list of documents
+
+    vectorstore = Chroma.from_documents(
+    documents=docs,
+    embedding=embeddings,
+    persist_directory="chroma_db"
+)
+
+    # retrive documents from the vector database
+
+    retriver = vectorstore.as_retriever(
+        search_type="mmr",
+        search_kwargs={"k":2, "fetch_k":5}
+    )
+    
+    result = retriver.get_relevant_documents("What is AI?")
+
+    for r in result:
+        print(r.page_content)
+        print(r.metadata)
