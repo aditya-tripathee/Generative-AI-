@@ -1,6 +1,9 @@
 # Retrivers 
 # Now before understanding retrivers lets go through a diagram to understand the application 
 # that we are creating and we will also see the use of retrivers in that application 
+# two types of sources 
+# 1. by data source 
+# 2. by retrieval stragety 
    
 import warnings
 from pathlib import Path
