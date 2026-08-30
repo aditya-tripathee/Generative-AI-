@@ -1,3 +1,5 @@
+# Character Based Text Splitter
+
 # import warnings
 # warnings.filterwarnings("ignore")
 
@@ -35,18 +37,32 @@
 
 # token based splitting 
 
-from langchain_community.document_loaders.text import TextLoader
-from langchain_text_splitters import TokenTextSplitter
+# from pathlib import Path
+# from langchain_community.document_loaders import PyPDFLoader
+# from langchain_text_splitters import TokenTextSplitter
 
-loader = TextLoader("text_splitters.txt")
-docs = loader.load()
+# pdf_path = Path(__file__).parent / "KING.pdf"
+# loader = PyPDFLoader(str(pdf_path))
+# docs = loader.load()
 
-splitter = TokenTextSplitter(
-    chunk_size=20,
-    chunk_overlap=2,
-)
+# splitter = TokenTextSplitter( 
+#     chunk_size=20,
+#     chunk_overlap=2,
+# )
 
-chunks = splitter.split_documents(docs)
+# chunks = splitter.split_documents(docs)
 
-print(f"split into {len(chunks)} chunks")
-print(chunks)
+# print(f"split into {len(chunks)} chunks")
+# if chunks:
+#     print("--- First Chunk Preview ---")
+#     print(chunks)
+
+
+
+
+#  Text Splitter
+
+
+
+
+

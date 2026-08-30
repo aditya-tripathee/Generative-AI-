@@ -83,7 +83,113 @@ Popular tools: `Ragas`, `TruLens`, `DeepEval`.
 5.  Token based splitting :-- Split text based on the number of tokens
 6.  Markdown based splitting :-- Split text based on the markdown format
 7.  Code based splitting :-- Split text based on the code format
-8.  Semantic based splitting :-- Split text based on the semantic meaning
+8.  Semantic based splitting :-- Split text based on the semantic meaning rather characters or tokens
 
+
+
+# Database in RAG :- 
+    1.  vector database
+    2.  chromadb
+    3.  faiss
+    4.  qdrant
+    5.  pinecone
+    6.  milvus
+
+
+    Vector Database:- 
+        A vector database is a specialized database designed to store, manage, and search high-dimensional vectors 
+        (numerical representations of text, images, or other data) efficiently. Unlike traditional databases that 
+        store structured data in tables, vector databases use vector embeddings to perform similarity searches.
+        Algorithm for vector search :- 
+        # 1. HNSW (Hierarchical Navigable Small World) - The Industry Standard
+
+HNSW is currently the most widely used and recommended algorithm for high-performance vector search.
+
+How it works:
+- It builds a multi-layered graph structure where each node is a vector.
+- The top layers have very few nodes and long connections, allowing for fast global navigation.
+- The bottom layers have many nodes and short connections, allowing for precise local refinement.
+- Search starts at the top layer, quickly zooms into the relevant region, and then refines the search at lower layers.
+
+Pros:
+- Very fast (logarithmic time complexity)
+- Memory efficient
+- High recall (finds most relevant vectors)
+- Good for dynamic datasets (can add/delete vectors easily)
+
+Cons:
+- Can be memory intensive (stores graph structure)
+- More complex to implement than simple methods
+
+# 2. IVF (Inverted File Index)
+
+IVF is another very popular algorithm, often used in combination with other techniques (like IVF-PQ).
+
+How it works:
+- It clusters all vectors into groups (Voronoi cells) using K-Means clustering.
+- Each cluster is assigned an inverted list of all vectors in that cluster.
+- To search, it first finds the nearest clusters and then searches only within those clusters.
+
+Pros:
+- Good balance of speed and accuracy
+- Scales well to large datasets
+- Flexible (can adjust cluster count)
+
+Cons:
+- Requires pre-clustering (offline step)
+- Performance depends heavily on cluster quality
+- Can miss relevant vectors if they fall between clusters
+
+# 3. PQ (Product Quantization)
+
+PQ is a compression technique that reduces memory usage and speeds up search by compressing the vectors.
+
+How it works:
+- It divides vectors into smaller sub-vectors.
+- Each sub-vector is quantized (mapped to the nearest centroid in a small codebook).
+- Reduces memory usage significantly (e.g., from 1536 dimensions to 64 bytes per vector).
+
+Pros:
+- Very memory efficient
+- Fast search (comparison of compressed codes)
+- Good for large-scale datasets
+
+Cons:
+- Lower accuracy than HNSW or IVF (loss of precision)
+- Requires trade-off between memory and accuracy
+
+# 4. LSH (Locality Sensitive Hashing)
+
+LSH uses hashing functions that map similar vectors to the same "bucket".
+
+How it works:
+- Uses hash functions where similar vectors have high probability of hashing to the same bucket.
+- Only searches within the buckets that the query vector hashes to.
+
+Pros:
+- Very fast for approximate search
+- Simple to implement
+- Good for massive datasets
+
+Cons:
+- Lower accuracy (approximate search)
+- Sensitive to hash function choice
+- Performance degrades with higher dimensions
+
+# 5. Tree-based Methods (ANNOY, KD-Trees)
+
+These methods use tree structures to partition the vector space.
+
+ANNOY (Approximate Nearest Neighbors Oh Yeah):
+- Builds multiple random binary trees to partition the space.
+- Searches by traversing the trees to find approximate nearest neighbors.
+
+KD-Trees:
+- Builds a binary tree by recursively splitting the space along one dimension at a time.
+
+Pros:
+- Simple to implement
+- Memory efficient
+- Good for low-dimensional data
 
 
