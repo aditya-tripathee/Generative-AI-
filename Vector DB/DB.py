@@ -47,30 +47,27 @@ for r in result:
 
 RETRIVER = vectorstore.as_retriever(search_kwargs={"k":2})
 
-result = RETRIVER.get_relevant_documents("What is AI?")
+result = RETRIVER.invoke("What is AI?")
 
 for r in result:
     print(r.page_content)
     print(r.metadata)
 
-
-    # creating vector database from list of documents
-
-    vectorstore = Chroma.from_documents(
+# creating vector database from list of documents
+vectorstore = Chroma.from_documents(
     documents=docs,
     embedding=embeddings,
     persist_directory="chroma_db"
 )
 
-    # retrive documents from the vector database
+# retrieve documents from the vector database
+retriver = vectorstore.as_retriever(
+    search_type="mmr",
+    search_kwargs={"k":2, "fetch_k":5}
+)
 
-    retriver = vectorstore.as_retriever(
-        search_type="mmr",
-        search_kwargs={"k":2, "fetch_k":5}
-    )
-    
-    result = retriver.get_relevant_documents("What is AI?")
+result = retriver.invoke("What is AI?")
 
-    for r in result:
-        print(r.page_content)
-        print(r.metadata)
+for r in result:
+    print(r.page_content)
+    print(r.metadata)
