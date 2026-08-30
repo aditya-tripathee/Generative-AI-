@@ -74,3 +74,16 @@ You evaluate RAG systems using:
 - **Answer Relevance:** Does the final answer address the user's question?
 
 Popular tools: `Ragas`, `TruLens`, `DeepEval`.
+
+#Text Splitter types :-
+1.  Character based splitting :-- Split text based on the number of characters
+2.  Word based splitting :-- Split text based on the number of words
+3.  Sentence based splitting :-- Split text based on the number of sentences
+4.  Recursive character based splitting :-- Split text based on the number of characters recursively
+5.  Token based splitting :-- Split text based on the number of tokens
+6.  Markdown based splitting :-- Split text based on the markdown format
+7.  Code based splitting :-- Split text based on the code format
+8.  Semantic based splitting :-- Split text based on the semantic meaning
+
+
+

@@ -1,17 +1,52 @@
-import warnings
-from pathlib import Path
-from langchain_community.document_loaders import TextLoader
+# import warnings
+# warnings.filterwarnings("ignore")
 
-warnings.filterwarnings("ignore", category=DeprecationWarning)
+# print("1. Loading LangChain modules (this can take 10-20 seconds)...", flush=True)
 
-# Resolve notes.txt relative to test.py directory
-file_path = Path(__file__).parent / "notes.txt"
+# from pathlib import Path
+# from langchain_community.document_loaders.text import TextLoader
+# from langchain_text_splitters import CharacterTextSplitter, RecursiveCharacterTextSplitter
 
-loader = TextLoader(file_path, encoding="utf-8")
+# file_path = Path(__file__).parent / "text_splitters.txt"
+
+# print("2. Loading document...", flush=True)
+# data = TextLoader(file_path, encoding="utf-8")
+# docs = data.load()
+
+# print("3. Splitting document...", flush=True)
+# # CharacterTextSplitter splits ONLY by double newlines (\n\n)
+# splitter = CharacterTextSplitter(
+#     separator="\n\n",
+#     chunk_size=20,
+#     chunk_overlap=2,
+#     length_function=len,
+# )
+
+# chunks = splitter.split_documents(docs)
+
+# print(f"\nSuccessfully split into {len(chunks)} chunks:\n", flush=True)
+# for i, chunk in enumerate(chunks, 1):
+#     print(f"--- Chunk {i} ---")
+#     print(chunk.page_content.strip())
+#     print("-" * 30, flush=True)
+
+
+
+
+# token based splitting 
+
+from langchain_community.document_loaders.text import TextLoader
+from langchain_text_splitters import TokenTextSplitter
+
+loader = TextLoader("text_splitters.txt")
 docs = loader.load()
 
-print(f"Loaded {len(docs)} document(s)")
-print("Metadata:", docs[0].metadata)
-print("\n--- Content Preview ---")
-print(docs[0])
+splitter = TokenTextSplitter(
+    chunk_size=20,
+    chunk_overlap=2,
+)
 
+chunks = splitter.split_documents(docs)
+
+print(f"split into {len(chunks)} chunks")
+print(chunks)

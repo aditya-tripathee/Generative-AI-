@@ -1,0 +1,37 @@
+Text Splitters in Retrieval-Augmented Generation (RAG)
+
+1. Introduction to Text Splitting
+When building Retrieval-Augmented Generation (RAG) applications, large documents cannot be fed directly into vector embeddings or LLM context windows in a single piece. Text splitters break down large documents into smaller, semantically meaningful chunks. Proper text chunking ensures that the vector database retrieves accurate, relevant context for user queries while staying within model token limits.
+
+2. Why Chunking Matters
+- Context Window Constraints: Language models have finite context windows (e.g., 4k, 8k, 32k, or 128k tokens).
+- Embedding Precision: Embedding large text files dilutes specific semantic information. Smaller chunks improve search accuracy.
+- Cost and Latency Reduction: Passing only relevant chunks reduces API token usage and speeds up response generation.
+- Noise Reduction: Eliminates irrelevant context, reducing hallucination in LLM responses.
+
+3. Types of Text Splitters
+a) CharacterTextSplitter:
+Splits text based on a fixed single character separator (e.g., '\n\n' or '\n'). It measures chunk length by character count. Simple and fast, but might break sentences abruptly if separators are spaced far apart.
+
+b) RecursiveCharacterTextSplitter:
+The recommended default splitter for generic text. It tries to split on a list of separators in order (['\n\n', '\n', ' ', '']) to keep paragraphs, sentences, and words together as much as possible.
+
+c) TokenTextSplitter / SentenceTransformersTokenTextSplitter:
+Splits text based on model tokens (e.g., OpenAI tiktoken or HuggingFace tokenizers). Ensures chunks strictly conform to token limits rather than character counts.
+
+d) Code and Markdown Splitters:
+Specialized splitters (e.g., MarkdownTextSplitter, PythonCodeTextSplitter) that respect structural syntax like headers (#), functions (def), classes (class), and code blocks (```).
+
+e) Semantic Chunking:
+Uses embedding similarity between adjacent sentences to detect topic transitions and dynamically split text where semantic context shifts.
+
+4. Key Hyperparameters
+- chunk_size: Maximum size of each chunk (in characters or tokens).
+- chunk_overlap: Number of characters/tokens shared between consecutive chunks to preserve semantic context across boundaries.
+- length_function: Function used to calculate chunk size (e.g., len for characters, tokenizer.encode for tokens).
+- separator / separators: Characters used to split the text.
+
+5. Best Practices for Chunking
+- Match chunk size to your use case: Small chunks (200-500 tokens) work best for granular search; larger chunks (1000-2000 tokens) preserve broader narrative context.
+- Always use overlap: A 10% to 20% chunk overlap prevents loss of context at chunk boundaries.
+- Benchmark retrieval quality: Test different chunking strategies against your domain-specific dataset to optimize top-k retrieval metrics.
