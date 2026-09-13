@@ -61,3 +61,26 @@ Tool Calling Process:
 5. The tool call request is processed by the tool.
 6. The tool call result is sent to the LLM.
 7. The LLM generates a response.
+
+
+Tool Execution :-- 
+
+Agent
+   ^ 
+   |  Tool Calls + Human Messages
+   |
+   v
+Model (LCEL)
+   | 
+   v
+Tool Executor
+
+
+Graph-based Agents :-- 
+
+
+Tool Calling Agent :-- It is an agent that uses tools and streaming.
+
+Model(LCEL):- It is a model that is used to generate text.
+
+

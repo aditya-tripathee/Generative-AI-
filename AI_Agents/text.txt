@@ -1,0 +1,27 @@
+AI agent:-- It is a system that can perform tasks that typically require human intelligence, 
+such as understanding natural language, reasoning, and making decisions. 
+
+
+Components of an AI Agent:
+1. Prompt: The input to the agent.
+2. Model: The brain of the agent.
+3. Tools: The hands of the agent.
+
+
+Agent Executor:-- 
+
+Agent Executor is a wrapper that runs an agent. It is used to execute an agent.
+
+Graph-based Agents :-- 
+
+It is an agent that uses a graph to represent the flow of information between the agent and the tools. It is used to execute an agent.
+
+Tool Calling Agent :-- It is an agent that uses tools to get the real-world data. It is used to execute an agent.
+
+
+user query -> decide tool -> run tool -> final answer
+
+Step 1: Decide tool
+Step 2: Run tool
+Step 3: Final answer
+
