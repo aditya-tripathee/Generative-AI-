@@ -1,0 +1,51 @@
+ LLM (Large Language Model) :- It is a model that is trained on a large amount of text data to understand and generate human-like text. It is a deep learning model used for natural language processing tasks.
+
+
+ Tools :- It is a simply function that can be used by the LLM to get the real world data. We used an LLM as the brain of the application and tools as the hands of the application.
+
+
+ Example :- 
+
+ Agent = Brain(LLM) + Tools
+
+ Tools category:--
+1. Built-in Tools :- Tools that are already present in the system.
+    Example :- Google Search
+
+2. Custom Tools :- Tools that are created by the user.
+    Example :- Calculator, Weather, Flight booking
+
+
+ LangChain :- LangChain is a framework for developing applications powered by language models. It provides a way to chain together different components of an application to create a more complex system.
+
+
+ LangChain is composed of several modules:--
+
+1. Models :- Models are the language models that are used to generate text. They can be used to generate text, translate text, summarize text, etc.
+
+2. Prompts :- Prompts are the input to the models. They are used to generate text, translate text, summarize text, etc.
+
+3. Chains :- Chains are the sequence of models that are used to generate text. They can be used to generate text, translate text, summarize text, etc.
+
+4. Agents :- Agents are the decision-making units that use LLMs to determine which actions to take and in what order.
+
+5. Memory :- Memory is the ability of the application to remember the past interactions with the user. It can be used to generate text, translate text, summarize text, etc.
+
+6. Indexes :- Indexes are the ways to store and retrieve information from the application. They can be used to generate text, translate text, summarize text, etc.
+
+7. Callbacks :- Callbacks are the ways to monitor and control the application. They can be used to generate text, translate text, summarize text, etc.
+
+
+Tool Binding: Tool Binding is the process of binding a tool to a model. It is used to attach configuration (like a model) to a Runnable.
+
+LangChain now focuses on "LCEL (LangChain Expression Language)" and "Tool Calling".
+
+1. RunnablePassthrough: A passthrough component.
+2. Structured Tool: A structured wrapper around a function.
+3. Tool Calling Agent: An agent that uses tools and streaming.
+4. AgentExecutor: A wrapper to run an agent.
+5. Tool Node: Used in graph-based agents.
+
+Core Concepts:
+1. Runnable: The base interface in LangChain, representing something that can be run (invoked, streamed, or echoed).
+2. bind(): A method used to attach configuration (like a model) to a Runnable.
